@@ -10,31 +10,31 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface ProductMapper {
+public interface CarMapper {
 
     /**
-     * Маппит DTO в продукт без UUID
+     * Маппит DTO в car без UUID
      *
      * @param carDto - DTO для маппинга
-     * @return новый продукт
+     * @return новый car
      */
     Car toCar(CarDto carDto);
 
     /**
      * Маппит текущий продукт в DTO без даты
      *
-     * @param car - существующий продукт
+     * @param car - существующий car
      * @return DTO с идентификатором
      */
-    InfoCarDto toInfoProductDto(Car car);
+    InfoCarDto toInfoCarDto(Car car);
 
     /**
-     * Сливает существующий продукт с информацией из DTO
+     * Сливает существующий car с информацией из DTO
      * не меняет дату создания и идентификатор
      *
-     * @param car    существующий продукт
+     * @param car    существующий car
      * @param carDto информация для обновления
-     * @return обновлённый продукт
+     * @return обновлённый car
      */
     Car merge(@MappingTarget Car car, CarDto carDto);
 }
