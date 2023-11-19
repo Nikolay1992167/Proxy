@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import static by.clevertec.constants.Constants.PATH_TO_FILE_XML;
 
@@ -16,7 +17,8 @@ public class ReportCreatorXML {
         try {
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.registerModule(new JavaTimeModule());
-            File file = new File(PATH_TO_FILE_XML);
+            String uniqueId = UUID.randomUUID().toString();
+            File file = new File(PATH_TO_FILE_XML + uniqueId + ".xml");
             xmlMapper.writeValue(file, car);
         } catch (IOException e) {
             throw new XMLParserException();

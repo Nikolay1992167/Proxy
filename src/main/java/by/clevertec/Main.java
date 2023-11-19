@@ -18,12 +18,13 @@ import java.util.List;
 import java.util.UUID;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        System.out.println("Проверка выполнения программы");
+        extracted();
 
-        // extracted();
-        startApplication("8c7b3985-190e-4829-8d9f-46ff5d410462", "8c7b3985-190e-4829-8d9f-46ff5d410462", "fa93b6c9-622c-456e-b826-bb1622d2bc01");
+//        System.out.println("Проверка выполнения программы");
+//        startApplication("", "", "");
     }
 
     private static void startApplication(String idForFindMethod, String idForUpdateMethod, String idForDeleteMethod) {
