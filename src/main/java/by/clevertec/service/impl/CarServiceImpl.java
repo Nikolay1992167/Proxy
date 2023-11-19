@@ -28,7 +28,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public InfoCarDto findById(UUID id) {
         Car car = carDAO.getById(id)
-                .orElseThrow(() -> new NotFoundException("Автомобиль с %s не найден"));
+                .orElseThrow(() -> new NotFoundException("Автомобиль с " + id + " не найден!"));
         return carMapper.toInfoCarDto(car);
     }
 

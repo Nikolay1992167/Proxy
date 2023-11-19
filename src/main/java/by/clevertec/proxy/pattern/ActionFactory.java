@@ -36,7 +36,7 @@ public class ActionFactory{
         return action;
     }
 
-    private Optional<Car> getById(Object[] args) {
+    public Optional<Car> getById(Object[] args) {
 
         UUID id = (UUID) args[0];
         Car car = cache.get(id);
@@ -54,7 +54,7 @@ public class ActionFactory{
         }
     }
 
-    private Car save(Object[] args) {
+    public Car save(Object[] args) {
 
         Car carToSave = (Car) args[0];
         Car savedCar = target.save(carToSave);
@@ -64,7 +64,7 @@ public class ActionFactory{
         return savedCar;
     }
 
-    private Car update(Object[] args) {
+    public Car update(Object[] args) {
 
         Car carToUpdate = (Car) args[0];
         Car updatedCar = target.update(carToUpdate);
@@ -73,7 +73,7 @@ public class ActionFactory{
         return updatedCar;
     }
 
-    private Car delete(Object[] args) {
+    public Car delete(Object[] args) {
 
         cache.delete((UUID) args[0]);
         log.info("Удалено из кэша: {}", args[0]);

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 @UtilityClass
 public class ConnectionManager {
 
-    private Connection connection;
+    public Connection connection;
 
     /**
      * Метод для получения соединения с базой данных PostgresSQL.

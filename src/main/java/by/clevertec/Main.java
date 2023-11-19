@@ -22,9 +22,13 @@ public class Main {
 
         System.out.println("Проверка выполнения программы");
 
-        DBRunner.runSqlScripts();
+        // extracted();
+        startApplication("8c7b3985-190e-4829-8d9f-46ff5d410462", "8c7b3985-190e-4829-8d9f-46ff5d410462", "fa93b6c9-622c-456e-b826-bb1622d2bc01");
+    }
+
+    private static void startApplication(String idForFindMethod, String idForUpdateMethod, String idForDeleteMethod) {
         CarDto createCar = new CarDto("Ладушка", "Почти хороший автомобиль!", BigDecimal.valueOf(105000));
-        CarDto updateCar = new CarDto("Москвич", "Был хорошим авто!", BigDecimal.valueOf(105000));
+        CarDto updateCar = new CarDto("Москвич", "Был хорошим авто наверное!", BigDecimal.valueOf(105000));
 
         CarDAO carDAO = new CarDAOImpl();
         CarMapper carMapper = new CarMapperImpl();
@@ -38,8 +42,12 @@ public class Main {
         service.create(createCar);
         List<InfoCarDto> all = service.findAll();
         System.out.println(all);
-        service.findById(UUID.fromString("0b52aab1-e818-48b4-9ce5-a8c63e331b62"));
-        service.update(UUID.fromString("0b52aab1-e818-48b4-9ce5-a8c63e331b62"), updateCar);
-        service.delete(UUID.fromString("f9c7e367-50e3-44d3-a4c8-e6448084ba66"));
+        service.findById(UUID.fromString(idForFindMethod));
+        service.update(UUID.fromString(idForUpdateMethod), updateCar);
+        service.delete(UUID.fromString(idForDeleteMethod));
+    }
+
+    private static void extracted() {
+        DBRunner.runSqlScripts();
     }
 }

@@ -1,6 +1,7 @@
 package by.clevertec.dto;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record InfoCarDto(
@@ -11,5 +12,7 @@ public record InfoCarDto(
 
         String description,
 
-        BigDecimal price) {
+        BigDecimal price,
+
+        LocalDateTime created) {
 }

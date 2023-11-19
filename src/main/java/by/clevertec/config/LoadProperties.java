@@ -1,5 +1,6 @@
 package by.clevertec.config;
 
+import by.clevertec.exception.PropertiesException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public class LoadProperties {
         try {
             yamlConfiguration.read(resourceAsStream);
         } catch (ConfigurationException e) {
-            throw new RuntimeException(e);
+            throw new PropertiesException();
         }
         configuration = yamlConfiguration;
     }

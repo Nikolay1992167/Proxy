@@ -7,16 +7,20 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static by.clevertec.constants.Constants.DESCRIPTION_REGEX;
-import static by.clevertec.constants.Constants.NAME_REGEX;
+import static by.clevertec.constants.Constants.*;
 
 public class Validation {
 
     /**
      * Проверяет объект для сохранения и формирует список ошибок для выбрасывания исключения.
+     *
      * @param carDto - проверяемый объект.
      */
     public void validate(CarDto carDto) {
+        if (carDto == null) {
+            throw new IllegalArgumentException("CarDto не может быть null");
+        }
+
         List<String> validationErrors = new ArrayList<>();
         validateName(carDto, validationErrors);
         validateDescription(carDto, validationErrors);
@@ -25,33 +29,34 @@ public class Validation {
     }
 
     private void validateName(CarDto carDto, List<String> errors) {
-        if (carDto.name() != null) {
-            if (!carDto.name().matches(NAME_REGEX)) {
-                errors.add("Неверное имя car!");
-            } else if (carDto.name().trim().isEmpty()) {
-                errors.add("Не введено имя!");
-            }
+        String name = carDto.name();
+        if (name == null || name.trim().isEmpty()) {
+            errors.add(EMPTY_NAME_ERROR);
+            return;
+        }
+        if (!name.matches(NAME_REGEX)) {
+            errors.add(INVALID_NAME_ERROR);
         }
     }
 
     private void validateDescription(CarDto carDto, List<String> errors) {
-        if (carDto.description().matches(DESCRIPTION_REGEX)){
-            errors.add("Неверное описание car!");
+        String description = carDto.description();
+        if (description != null && description.matches(DESCRIPTION_REGEX)) {
+            errors.add(INVALID_DESCRIPTION_ERROR);
         }
     }
 
     private void validatePrice(CarDto carDto, List<String> errors) {
-        if (carDto.price() == null) {
-            errors.add("Цена не может быть null");
-        } else {
-            if (carDto.price().compareTo(BigDecimal.ZERO) <= 0) {
-                errors.add("Корректно укажите цену, она не может быть меньше либо равна 0");
-            }
+        BigDecimal price = carDto.price();
+        if (price == null) {
+            errors.add(NULL_PRICE_ERROR);
+        } else if (price.compareTo(BigDecimal.ZERO) <= 0) {
+            errors.add(INVALID_PRICE_ERROR);
         }
     }
 
-    private void  throwValidationException(List<String> errors){
-        if (!errors.isEmpty()){
+    private void throwValidationException(List<String> errors) {
+        if (!errors.isEmpty()) {
             throw new ValidationException(errors);
         }
     }
